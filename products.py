@@ -1,5 +1,6 @@
 products = []
-print("Type q for exit")
+print("Please type q for exit ")
+
 while True:
     name = input("Products name ")
     if name == "q":
@@ -9,5 +10,10 @@ while True:
 
 print(products)
 
-for p in products:
-    print(p[0], "price is ", p[1])
+
+for product in products:
+    print(product[0], "price is ", product[1])
+
+with open("products.csv", "w") as f:
+    for p in products:
+        f.write(p[0] + "," + p[1] + "\n")
