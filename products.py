@@ -1,4 +1,6 @@
-import os
+import os   # Operating system                                    #  refactor 重构
+
+#  读取资料
 
 
 def read_file(filename):
@@ -9,8 +11,9 @@ def read_file(filename):
                 continue
             name, price = line.strip().split(",")
             products.append([name, price])
-
     return products
+
+#   商品输入
 
 
 def user_input(products):
@@ -23,10 +26,14 @@ def user_input(products):
     print(products)
     return products
 
+#   印出商品和价格
+
 
 def print_products(products):
     for p in products:
         print(p[0], "的价格是, ", p[1])
+
+#     写入资料
 
 
 def write_file(filename, products):
@@ -38,16 +45,18 @@ def write_file(filename, products):
 
 def main():
     filename = "products.csv"
-    products = []
+    products = []               # 如果 products = [] 放在 第40行， 就会 覆盖overwrite资料。
     if os.path.isfile(filename):
         print("找到档案")
+        # 读取local variable 的 filename,然后储存在 products.
         products = read_file(filename)
     else:
         print("找不到档案")
-
+        #  如果 products = [] 放在 46行， 就不会 覆盖overwrite资料。
+    # 从第43行的product 投进 user_input(products)里，执行后再存入products 里
     products = user_input(products)
-    print_products(products)
-    write_file("products.csv", products)
+    print_products(products)  # 47行的 products 投进 print_products(products)里
+    write_file("products.csv", products)  # 写入档案（文件名称， 以上所有执行了的资料）
 
 
 main()
